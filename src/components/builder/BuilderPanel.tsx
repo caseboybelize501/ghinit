@@ -10,12 +10,18 @@ interface Props {
 }
 
 const SYSTEM_PROMPT = `You are an expert software engineer and code generator.
-When asked to generate a project, respond ONLY with a JSON array of files like:
+When asked to generate a project, respond ONLY with a valid JSON array. No preamble, no explanation, no markdown outside the array.
+Format:
 [
-  {"path": "src/main.py", "content": "..."},
+  {"path": "src/main.py", "content": "...full file content..."},
   {"path": "README.md", "content": "..."}
 ]
-Generate complete, working, well-commented code. Include a README.md always.`;
+Rules:
+- Always include a README.md
+- Write complete, working, well-commented code
+- Escape all special characters in content strings properly
+- Do not truncate any file - write the full content
+- Output ONLY the JSON array, nothing before or after it`;
 
 type Step = 'setup' | 'preview' | 'building' | 'done';
 
@@ -321,20 +327,49 @@ Return a JSON array of ALL project files with their full content.`;
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function parseFilesFromResponse(raw: string): GeneratedFile[] {
+  // Strategy 1: find a clean JSON array
   try {
-    // Strip markdown code blocks if present
-    const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    // Find JSON array
+    const cleaned = raw
+      .replace(/```json\s*/gi, '')
+      .replace(/```\s*/g, '')
+      .trim();
     const start = cleaned.indexOf('[');
     const end = cleaned.lastIndexOf(']');
-    if (start === -1 || end === -1) return [];
-    const json = cleaned.slice(start, end + 1);
-    const parsed = JSON.parse(json);
-    if (Array.isArray(parsed)) {
-      return parsed.filter(f => f.path && typeof f.content === 'string');
+    if (start !== -1 && end !== -1 && end > start) {
+      const json = cleaned.slice(start, end + 1);
+      const parsed = JSON.parse(json);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.filter(f => f.path && typeof f.content === 'string');
+      }
     }
   } catch {}
-  return [];
+
+  // Strategy 2: extract individual file objects even if array is malformed/truncated
+  const files: GeneratedFile[] = [];
+  const objRegex = /\{\s*"path"\s*:\s*"([^"]+)"\s*,\s*"content"\s*:\s*("(?:[^"\\]|\\.)*"|`[^`]*`)/g;
+  let match;
+  while ((match = objRegex.exec(raw)) !== null) {
+    try {
+      const path = match[1];
+      // Parse the content string properly
+      const contentRaw = match[2];
+      const content = contentRaw.startsWith('`')
+        ? contentRaw.slice(1, -1)
+        : JSON.parse(contentRaw);
+      if (path && typeof content === 'string') {
+        files.push({ path, content });
+      }
+    } catch {}
+  }
+  if (files.length > 0) return files;
+
+  // Strategy 3: look for markdown code blocks with file path comments
+  const blockRegex = /#+\s*`?([^\n`]+\.\w+)`?\n```[\w]*\n([\s\S]*?)```/g;
+  while ((match = blockRegex.exec(raw)) !== null) {
+    files.push({ path: match[1].trim(), content: match[2] });
+  }
+
+  return files;
 }
 
 function mergFiles(base: GeneratedFile[], extra: GeneratedFile[]): GeneratedFile[] {
