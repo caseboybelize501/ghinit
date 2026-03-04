@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { ghListPrs, ghListIssues, ghCreatePr, ghCreateIssue, gitCommitAndPush, ghBrowseRepo } from '../../lib/api';
-import type { Repo, PullRequest, Issue, QwenLocation } from '../../types';
+import type { Repo, PullRequest, Issue } from '../../types';
 
 interface Props {
   repos: Repo[];
   loading: boolean;
   onRefresh: () => void;
-  qwenLocation: QwenLocation | null;
 }
 
 type RepoTab = 'files' | 'prs' | 'issues' | 'commit';
 
-export default function RepoPanel({ repos, loading, onRefresh, qwenLocation }: Props) {
+export default function RepoPanel({ repos, loading, onRefresh }: Props) {
   const [selectedRepo, setSelectedRepo] = useState<Repo | null>(null);
   const [repoTab, setRepoTab] = useState<RepoTab>('files');
   const [prs, setPrs] = useState<PullRequest[]>([]);

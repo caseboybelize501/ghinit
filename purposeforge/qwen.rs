@@ -1,4 +1,5 @@
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::io::{BufRead, BufReader};
 use tauri::{AppHandle, Emitter};
 use serde::{Deserialize, Serialize};
 
@@ -120,35 +121,6 @@ fn get_search_paths() -> Vec<String> {
     ]
 }
 
-fn get_file_tree(dir: &std::path::Path, prefix: &str, depth: u8) -> String {
-    if depth == 0 { return String::new(); }
-    let mut tree = String::new();
-    let mut entries_vec = vec![];
-    
-    if let Ok(entries) = std::fs::read_dir(dir) {
-        for entry in entries.flatten() {
-            entries_vec.push(entry);
-        }
-    }
-    
-    // Sort directories first, then files
-    entries_vec.sort_by_key(|a| (!a.path().is_dir(), a.file_name()));
-
-    for entry in entries_vec {
-        let name = entry.file_name().to_string_lossy().to_string();
-        if name == "node_modules" || name == "target" || name == ".git" || name == "dist" || name == "build" || name == ".next" {
-            continue;
-        }
-        if entry.path().is_dir() {
-            tree.push_str(&format!("{}📁 {}/\n", prefix, name));
-            tree.push_str(&get_file_tree(&entry.path(), &format!("{}  ", prefix), depth - 1));
-        } else {
-            tree.push_str(&format!("{}📄 {}\n", prefix, name));
-        }
-    }
-    tree
-}
-
 /// Stream a prompt to Qwen and emit tokens back to the frontend via Tauri events
 #[tauri::command]
 pub async fn qwen_generate(
@@ -156,67 +128,11 @@ pub async fn qwen_generate(
     location: QwenLocation,
     prompt: String,
     system: Option<String>,
-    project_path: Option<String>,
-    context_files: Option<Vec<String>>,
 ) -> Result<String, String> {
-    // 1. Load and Prune the PurposeForge Skillset
-    let skillset_path = ".purposeforge/skillset.md";
-    let skillset_raw = std::fs::read_to_string(skillset_path).unwrap_or_default();
-    
-    // Determine tech stack for pruning
-    let is_rust = project_path.as_ref().map(|p| std::path::Path::new(p).join("Cargo.toml").exists()).unwrap_or(false);
-    let is_python = project_path.as_ref().map(|p| std::path::Path::new(p).join("requirements.txt").exists()).unwrap_or(false);
-    let is_ts = project_path.as_ref().map(|p| std::path::Path::new(p).join("package.json").exists()).unwrap_or(true); // Default to TS for UI
-
-    let prunned_skillset: String = skillset_raw.lines()
-        .filter(|line| {
-            if line.contains("[CORE]") { return true; }
-            if is_rust && line.contains("[RUST]") { return true; }
-            if is_python && line.contains("[PYTHON]") { return true; }
-            if is_ts && line.contains("[TS]") { return true; }
-            // If no tags, keep it (headers, etc)
-            !line.contains("[") || !line.contains("]")
-        })
-        .collect::<Vec<_>>()
-        .join("\n");
-
-    // 2. Local Project Context (Memory)
-    let mut project_context = String::new();
-    if let Some(path) = project_path {
-        let p = std::path::Path::new(&path);
-        let tree = get_file_tree(p, "", 3); // Map up to 3 levels deep
-        let readme = std::fs::read_to_string(p.join("README.md")).unwrap_or_else(|_| "No README found.".to_string());
-        
-        project_context = format!(
-            "\n\n### ACTIVE PROJECT CONTEXT\nPath: {}\n\n#### Directory Structure:\n{}\n\n#### README.md:\n{}", 
-            path, tree, readme
-        );
-
-        if let Some(files) = context_files {
-            project_context.push_str("\n\n#### Provided Context Files:\n");
-            for file in files {
-                let file_path = p.join(file.trim());
-                if let Ok(content) = std::fs::read_to_string(&file_path) {
-                    project_context.push_str(&format!("--- FILE: {} ---\n{}\n\n", file, content));
-                }
-            }
-        }
-    }
-
-    // 3. Combine prompts
-    let combined_system = format!(
-        "{}{}\n\nAdditional Instructions:\n{}", 
-        prunned_skillset, 
-        project_context,
-        system.unwrap_or_default()
-    );
-
-    let system_arg = if combined_system.is_empty() { None } else { Some(combined_system) };
-
     match location.method.as_str() {
         "ollama" => {
             let model = location.model.unwrap_or("qwen2.5-coder:latest".into());
-            stream_ollama(&app, &model, &prompt, system_arg.as_deref()).await
+            stream_ollama(&app, &model, &prompt, system.as_deref()).await
         }
         "lmstudio" => {
             stream_openai_compat(
@@ -224,7 +140,7 @@ pub async fn qwen_generate(
                 "http://localhost:1234/v1/chat/completions",
                 &location.model.unwrap_or("qwen".into()),
                 &prompt,
-                system_arg.as_deref(),
+                system.as_deref(),
             ).await
         }
         _ => Err("Qwen not found. Please install via Ollama: `ollama pull qwen2.5-coder`".into()),
@@ -241,11 +157,7 @@ async fn stream_ollama(
     let mut body = serde_json::json!({
         "model": model,
         "prompt": prompt,
-        "stream": true,
-        "options": {
-            "num_predict": 16384,
-            "temperature": 0.2
-        }
+        "stream": true
     });
     if let Some(sys) = system {
         body["system"] = serde_json::Value::String(sys.to_string());

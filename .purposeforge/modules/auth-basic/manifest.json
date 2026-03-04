@@ -1,0 +1,20 @@
+{
+    "id": "auth-basic",
+    "name": "Basic Auth Module",
+    "description": "Simple React login component with state-based authentication.",
+    "tech_stack": [
+        "react",
+        "typescript"
+    ],
+    "files": [
+        {
+            "src": "AuthContext.tsx",
+            "dest": "src/context/AuthContext.tsx"
+        },
+        {
+            "src": "Login.tsx",
+            "dest": "src/components/auth/Login.tsx"
+        }
+    ],
+    "dependencies": []
+}

@@ -65,11 +65,19 @@ pub async fn gh_auth_status() -> Result<serde_json::Value, String> {
     );
 
     if output.status.success() || combined.contains("Logged in") {
-        // Extract username from output like: "Logged in to github.com account caseboybelize501"
-        let user = combined
-            .lines()
-            .find(|l| l.contains("Logged in") || l.contains("account"))
-            .and_then(|l| l.split_whitespace().last())
+        // More robust username extraction: look for "as " or "account " and take the following word before any (
+        let user = combined.lines()
+            .find(|l| l.contains("Logged in to"))
+            .and_then(|l| {
+                if let Some(pos) = l.find(" as ") {
+                    Some(&l[pos + 4..])
+                } else if let Some(pos) = l.find(" account ") {
+                    Some(&l[pos + 9..])
+                } else {
+                    l.split_whitespace().last()
+                }
+            })
+            .and_then(|s| s.split_whitespace().next())
             .map(|s| s.trim_matches(|c: char| !c.is_alphanumeric() && c != '-' && c != '_').to_string());
 
         Ok(serde_json::json!({

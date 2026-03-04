@@ -4,6 +4,7 @@ import type { QwenLocation } from '../../types';
 
 interface Props {
   qwenLocation: QwenLocation | null;
+  activeProjectPath: string | null;
 }
 
 interface Message {
@@ -16,7 +17,7 @@ const SYSTEM = `You are Qwen Coder, an expert programming assistant embedded in 
 a modular software builder. Help users with code, architecture, debugging, and project planning.
 Be concise but thorough. Use markdown for code blocks.`;
 
-export default function AIPanel({ qwenLocation }: Props) {
+export default function AIPanel({ qwenLocation, activeProjectPath }: Props) {
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hi! I\'m Qwen Coder. Ask me anything about your code, architecture, or project design. I can also help you refine what the Builder should generate.' }
   ]);
@@ -48,7 +49,7 @@ export default function AIPanel({ qwenLocation }: Props) {
         setMessages(prev => prev.map((m, i) =>
           i === prev.length - 1 ? { ...m, content: streamed } : m
         ));
-      });
+      }, activeProjectPath);
 
       // Mark done
       setMessages(prev => prev.map((m, i) =>
@@ -72,10 +73,15 @@ export default function AIPanel({ qwenLocation }: Props) {
     <div className="panel ai-panel">
       <div className="panel-header">
         <h1>AI Chat</h1>
-        {qwenLocation?.found
-          ? <span className="status-chip green">🟢 {qwenLocation.model ?? 'Qwen'}</span>
-          : <span className="status-chip red">🔴 Qwen not connected</span>
-        }
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {activeProjectPath && (
+            <span className="status-chip blue">🎯 {activeProjectPath.split('\\').pop()}</span>
+          )}
+          {qwenLocation?.found
+            ? <span className="status-chip green">🟢 {qwenLocation.model ?? 'Qwen'}</span>
+            : <span className="status-chip red">🔴 Qwen not connected</span>
+          }
+        </div>
       </div>
 
       {!qwenLocation?.found && (

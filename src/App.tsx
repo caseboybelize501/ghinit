@@ -1,18 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ghAuthStatus, ghAuthLogin, ghListRepos } from './lib/api';
+import { ghAuthStatus, ghListRepos } from './lib/api';
 import { useQwen } from './hooks/useQwen';
 import BuilderPanel from './components/builder/BuilderPanel';
 import RepoPanel from './components/repo/RepoPanel';
 import AIPanel from './components/ai/AIPanel';
+import DashboardPanel from './components/dashboard/DashboardPanel';
 import type { Tab, Repo } from './types';
 import './App.css';
 
 export default function App() {
-  const [tab, setTab] = useState<Tab>('builder');
+  const [tab, setTab] = useState<Tab>('dashboard');
   const [ghLoggedIn, setGhLoggedIn] = useState(false);
   const [ghUser, setGhUser] = useState<string | null>(null);
   const [repos, setRepos] = useState<Repo[]>([]);
   const [reposLoading, setReposLoading] = useState(false);
+  const [activeProjectPath, setActiveProjectPath] = useState<string | null>(null);
   const { location: qwenLocation, scanning: qwenScanning, scan: scanQwen } = useQwen();
 
   // Check GitHub auth on mount
@@ -72,16 +74,16 @@ export default function App() {
         </div>
 
         <nav className="sidebar-nav">
-          {(['builder', 'repos', 'ai'] as Tab[]).map(t => (
+          {(['dashboard', 'builder', 'repos', 'ai'] as Tab[]).map(t => (
             <button
               key={t}
               className={`nav-item ${tab === t ? 'active' : ''}`}
               onClick={() => setTab(t)}
             >
               <span className="nav-icon">
-                {t === 'builder' ? '🏗️' : t === 'repos' ? '📁' : '🤖'}
+                {t === 'dashboard' ? '📊' : t === 'builder' ? '🏗️' : t === 'repos' ? '📁' : '🤖'}
               </span>
-              <span>{t === 'builder' ? 'Builder' : t === 'repos' ? 'Repos' : 'AI Chat'}</span>
+              <span>{t === 'dashboard' ? 'Dashboard' : t === 'builder' ? 'Builder' : t === 'repos' ? 'Repos' : 'AI Chat'}</span>
             </button>
           ))}
         </nav>
@@ -124,11 +126,18 @@ export default function App() {
 
       {/* Main content */}
       <main className="main-content">
+        {tab === 'dashboard' && (
+          <DashboardPanel
+            activeProjectPath={activeProjectPath}
+            setActiveProjectPath={setActiveProjectPath}
+          />
+        )}
         {tab === 'builder' && (
           <BuilderPanel
             qwenLocation={qwenLocation}
             ghLoggedIn={ghLoggedIn}
             onProjectCreated={loadRepos}
+            activeProjectPath={activeProjectPath}
           />
         )}
         {tab === 'repos' && (
@@ -136,11 +145,13 @@ export default function App() {
             repos={repos}
             loading={reposLoading}
             onRefresh={loadRepos}
-            qwenLocation={qwenLocation}
           />
         )}
         {tab === 'ai' && (
-          <AIPanel qwenLocation={qwenLocation} />
+          <AIPanel
+            qwenLocation={qwenLocation}
+            activeProjectPath={activeProjectPath}
+          />
         )}
       </main>
     </div>

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "b3f5deaa-111c-477e-8a89-3229f0e2fc23",
+    "name": "agentforge",
+    "path": "d:/Users/CASE/projects\\agentforge",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771998651
+  },
+  {
+    "id": "5e8dd15c-a7f3-45bc-83fe-f7144c4a7d6d",
+    "name": "djapp",
+    "path": "d:/Users/CASE/projects\\djapp",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771996818
+  },
+  {
+    "id": "17c321c2-74c6-4bed-8138-dbcd07005425",
+    "name": "grafana-job-game-simulator",
+    "path": "d:/Users/CASE/projects\\grafana-job-game-simulator",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1769929411
+  },
+  {
+    "id": "c5ff95ba-3376-4b61-bae9-00fe5aa7f978",
+    "name": "iosappbuilder",
+    "path": "d:/Users/CASE/projects\\iosappbuilder",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771995364
+  },
+  {
+    "id": "102d98dc-e0ec-4f81-a5c6-7cee42f1e393",
+    "name": "test2",
+    "path": "d:/Users/CASE/projects\\test2",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771987459
+  },
+  {
+    "id": "eab7e859-8adf-456a-a9dc-18a370a3039e",
+    "name": "test3",
+    "path": "d:/Users/CASE/projects\\test3",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771990028
+  },
+  {
+    "id": "69b1b23f-1a48-4b11-bddc-63cde9f99859",
+    "name": "agentforge",
+    "path": "D:\\Users\\CASE\\Projects/agentforge",
+    "remote_url": "https://github.com/caseboybelize501/agentforge",
+    "tech_stack": [],
+    "last_modified": 1771998654
+  },
+  {
+    "id": "4a74bdc9-f235-40ef-914d-d19a67c19c83",
+    "name": "nexusbot",
+    "path": "D:\\Users\\CASE\\Projects/nexusbot",
+    "remote_url": "https://github.com/caseboybelize501/nexusbot",
+    "tech_stack": [],
+    "last_modified": 1772001163
+  },
+  {
+    "id": "d450e1a9-fb92-48fc-8573-0df74e7cd366",
+    "name": "contentswarm",
+    "path": "D:\\Users\\CASE\\Projects/contentswarm",
+    "remote_url": "https://github.com/caseboybelize501/contentswarm",
+    "tech_stack": [],
+    "last_modified": 1772003987
+  },
+  {
+    "id": "9c96d635-e6c5-424c-994a-d75fe905ce2f",
+    "name": "codereviewagent",
+    "path": "D:\\Users\\CASE\\Projects/codereviewagent",
+    "remote_url": "https://github.com/caseboybelize501/codereviewagent",
+    "tech_stack": [],
+    "last_modified": 1772038855
+  },
+  {
+    "id": "ad92eaa8-7a29-4fdc-8fbb-f828e9bfcaa9",
+    "name": "supplymind",
+    "path": "D:\\Users\\CASE\\Projects/supplymind",
+    "remote_url": "https://github.com/caseboybelize501/supplymind",
+    "tech_stack": [],
+    "last_modified": 1772041378
+  },
+  {
+    "id": "3ceeef5a-5454-460a-969c-a254b142846f",
+    "name": "pulsemedia",
+    "path": "D:\\Users\\CASE\\Projects/pulsemedia",
+    "remote_url": "https://github.com/caseboybelize501/pulsemedia",
+    "tech_stack": [],
+    "last_modified": 1772056500
+  },
+  {
+    "id": "543afc50-7dd8-46f3-931c-c38a9bef56ad",
+    "name": "quantumresearch",
+    "path": "D:\\Users\\CASE\\Projects/quantumresearch",
+    "remote_url": "https://github.com/caseboybelize501/quantumresearch",
+    "tech_stack": [],
+    "last_modified": 1772057160
+  }
+]

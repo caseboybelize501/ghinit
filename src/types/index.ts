@@ -57,6 +57,13 @@ export interface ProjectTemplate {
   structure: { path: string; content: string }[];
 }
 
+export interface Skill {
+  id: string;
+  name: string;
+  description: string;
+  prompt: string;
+}
+
 export interface BuildProjectRequest {
   project_name: string;
   description: string;
@@ -74,8 +81,27 @@ export interface BuildResult {
   message: string;
 }
 
+// ── Project Tracker ───────────────────────────────────────────────────────────
+export interface ProjectRecord {
+  id: string;
+  name: string;
+  path: string;
+  remote_url?: string;
+  tech_stack: string[];
+  last_modified: number;
+}
+
+// ── Module Injection ──────────────────────────────────────────────────────────
+export interface ModuleDefinition {
+  id: string;
+  name: string;
+  description: string;
+  tech_stack: string[];
+  files: { src: string; dest: string }[];
+}
+
 // ── App State ─────────────────────────────────────────────────────────────────
-export type Tab = 'builder' | 'repos' | 'ai';
+export type Tab = 'builder' | 'repos' | 'ai' | 'dashboard';
 
 export interface AppState {
   qwen: QwenLocation | null;

@@ -1,0 +1,213 @@
+[
+  {
+    "id": "057be117-0721-446e-84f9-db376dac959a",
+    "name": "-horizonclimate",
+    "path": "d:/Users/CASE/projects\\-horizonclimate",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772057960
+  },
+  {
+    "id": "9f08dd6d-f955-4abe-84ee-491f26164a34",
+    "name": "agentforge",
+    "path": "d:/Users/CASE/projects\\agentforge",
+    "remote_url": null,
+    "tech_stack": [
+      "node",
+      "react"
+    ],
+    "last_modified": 1772055402
+  },
+  {
+    "id": "5143254e-8eab-4982-8d26-cc093768019b",
+    "name": "catalystgov",
+    "path": "d:/Users/CASE/projects\\catalystgov",
+    "remote_url": null,
+    "tech_stack": [
+      "node"
+    ],
+    "last_modified": 1772055908
+  },
+  {
+    "id": "06259930-fef7-4962-809e-bde19b88fcd1",
+    "name": "codereviewagent",
+    "path": "d:/Users/CASE/projects\\codereviewagent",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772038851
+  },
+  {
+    "id": "b62dec49-731e-47fa-b9ea-4b5e00b7b704",
+    "name": "contentswarm",
+    "path": "d:/Users/CASE/projects\\contentswarm",
+    "remote_url": null,
+    "tech_stack": [
+      "python"
+    ],
+    "last_modified": 1772003983
+  },
+  {
+    "id": "30123191-ca6d-49d1-bbd4-b7605fdc08a6",
+    "name": "djapp",
+    "path": "d:/Users/CASE/projects\\djapp",
+    "remote_url": null,
+    "tech_stack": [
+      "node",
+      "react"
+    ],
+    "last_modified": 1771996818
+  },
+  {
+    "id": "7a88fcba-1345-4ed5-9f31-6a91d837b4ef",
+    "name": "EmergentVsCodeFork",
+    "path": "d:/Users/CASE/projects\\EmergentVsCodeFork",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772052616
+  },
+  {
+    "id": "7cc25982-c57b-4f50-9ddf-ca4fb2b983fc",
+    "name": "fluxconstruction",
+    "path": "d:/Users/CASE/projects\\fluxconstruction",
+    "remote_url": null,
+    "tech_stack": [
+      "python"
+    ],
+    "last_modified": 1772056847
+  },
+  {
+    "id": "00b78e02-27cf-40b5-867a-e51436e74984",
+    "name": "fraudshield",
+    "path": "d:/Users/CASE/projects\\fraudshield",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772051687
+  },
+  {
+    "id": "a76b7c3d-3ad0-4b32-b40f-fb58dad0892f",
+    "name": "grafana-job-game-simulator",
+    "path": "d:/Users/CASE/projects\\grafana-job-game-simulator",
+    "remote_url": null,
+    "tech_stack": [
+      "python"
+    ],
+    "last_modified": 1769929411
+  },
+  {
+    "id": "7fc8addd-cb4d-448a-a412-45de54f2800a",
+    "name": "iosappbuilder",
+    "path": "d:/Users/CASE/projects\\iosappbuilder",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771995364
+  },
+  {
+    "id": "ccd2ce69-7f00-43a1-be63-d3e88df07083",
+    "name": "NexusBot",
+    "path": "d:/Users/CASE/projects\\NexusBot",
+    "remote_url": null,
+    "tech_stack": [
+      "node",
+      "rust"
+    ],
+    "last_modified": 1772001160
+  },
+  {
+    "id": "ef0c586e-c3ad-4148-94a6-4fd889d61d4c",
+    "name": "pulsemedia",
+    "path": "d:/Users/CASE/projects\\pulsemedia",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772056496
+  },
+  {
+    "id": "34042cc3-03e8-4dc8-a613-1427151fed41",
+    "name": "quantumresearch",
+    "path": "d:/Users/CASE/projects\\quantumresearch",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772057156
+  },
+  {
+    "id": "8c2855df-d2ad-4e3c-a666-024aec511338",
+    "name": "qwen-agent-builder",
+    "path": "d:/Users/CASE/projects\\qwen-agent-builder",
+    "remote_url": null,
+    "tech_stack": [
+      "node",
+      "react"
+    ],
+    "last_modified": 1772057148
+  },
+  {
+    "id": "08f48a84-f9b5-48f7-88ef-f7b2afbf7238",
+    "name": "qwencoder",
+    "path": "d:/Users/CASE/projects\\qwencoder",
+    "remote_url": null,
+    "tech_stack": [
+      "node",
+      "react"
+    ],
+    "last_modified": 1772041473
+  },
+  {
+    "id": "b10a67c6-c3d0-461b-9a93-3b33de97d972",
+    "name": "supplymind",
+    "path": "d:/Users/CASE/projects\\supplymind",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1772041374
+  },
+  {
+    "id": "59ab54af-1489-4a7c-9342-4555cbff06f6",
+    "name": "synapsetrade",
+    "path": "d:/Users/CASE/projects\\synapsetrade",
+    "remote_url": null,
+    "tech_stack": [
+      "rust"
+    ],
+    "last_modified": 1772056409
+  },
+  {
+    "id": "0607dfd3-b708-414c-ac14-6db3be6a4b98",
+    "name": "test2",
+    "path": "d:/Users/CASE/projects\\test2",
+    "remote_url": null,
+    "tech_stack": [
+      "node"
+    ],
+    "last_modified": 1771987459
+  },
+  {
+    "id": "668694db-ccfa-4662-9dac-e8375032ce7c",
+    "name": "test3",
+    "path": "d:/Users/CASE/projects\\test3",
+    "remote_url": null,
+    "tech_stack": [],
+    "last_modified": 1771999793
+  },
+  {
+    "id": "d6a13b0b-f446-4da5-9534-c2e11624cd2b",
+    "name": "-horizonclimate",
+    "path": "D:\\Users\\CASE\\Projects/-horizonclimate",
+    "remote_url": "Display the description and the README of a GitHub repository.\n\nWith no argument, the repository for the current directory is displayed.\n\nWith `--web`, open the repository in a web browser instead.\n\nWith `--branch`, view a specific branch of the repository.\n\nFor more information about output formatting flags, see `gh help formatting`.\n\nUSAGE\n  gh repo view [<repository>] [flags]\n\nFLAGS\n  -b, --branch string     View a specific branch of the repository\n  -q, --jq expression     Filter JSON output using a jq expression\n      --json fields       Output JSON with the specified fields\n  -t, --template string   Format JSON output using a Go template; see \"gh help formatting\"\n  -w, --web               Open a repository in the browser\n\nINHERITED FLAGS\n  --help   Show help for command\n\nJSON FIELDS\n  archivedAt, assignableUsers, codeOfConduct, contactLinks, createdAt,\n  defaultBranchRef, deleteBranchOnMerge, description, diskUsage, forkCount,\n  fundingLinks, hasDiscussionsEnabled, hasIssuesEnabled, hasProjectsEnabled,\n  hasWikiEnabled, homepageUrl, id, isArchived, isBlankIssuesEnabled, isEmpty,\n  isFork, isInOrganization, isMirror, isPrivate, isSecurityPolicyEnabled,\n  isTemplate, isUserConfigurationRepository, issueTemplates, issues, labels,\n  languages, latestRelease, licenseInfo, mentionableUsers, mergeCommitAllowed,\n  milestones, mirrorUrl, name, nameWithOwner, openGraphImageUrl, owner, parent,\n  primaryLanguage, projects, projectsV2, pullRequestTemplates, pullRequests,\n  pushedAt, rebaseMergeAllowed, repositoryTopics, securityPolicyUrl,\n  squashMergeAllowed, sshUrl, stargazerCount, templateRepository, updatedAt, url,\n  usesCustomOpenGraphImage, viewerCanAdminister, viewerDefaultCommitEmail,\n  viewerDefaultMergeMethod, viewerHasStarred, viewerPermission,\n  viewerPossibleCommitEmails, viewerSubscription, visibility, watchers\n\nLEARN MORE\n  Use `gh <command> <subcommand> --help` for more information about a command.\n  Read the manual at https://cli.github.com/manual\n  Learn about exit codes using `gh help exit-codes`\n  Learn about accessibility experiences using `gh help accessibility`",
+    "tech_stack": [],
+    "last_modified": 1772057962
+  },
+  {
+    "id": "0a2b75f2-8ce1-4fd6-a588-5fe616732bda",
+    "name": "necrosynthesis",
+    "path": "D:\\Users\\CASE\\Projects/necrosynthesis",
+    "remote_url": "https://github.com/caseboybelize501/necrosynthesis",
+    "tech_stack": [],
+    "last_modified": 1772058937
+  },
+  {
+    "id": "6e5bd813-2444-473a-a354-1151b72e4625",
+    "name": "modular-ai-builder",
+    "path": "D:\\Users\\CASE\\Projects/modular-ai-builder",
+    "remote_url": "https://github.com/caseboybelize501/modular-ai-builder",
+    "tech_stack": [],
+    "last_modified": 1772648229
+  }
+]
